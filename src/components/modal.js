@@ -1,41 +1,45 @@
 
-export function openModal(type) {
-    const modal = document.querySelector(`.popup_type_${type}`);
+export const modal= document.querySelector('.popup');
+const closeButtons = document.querySelectorAll('.popup__close');
+
+export function openModal(modal) {
     modal.classList.add('popup_is-animated');
     modal.classList.add('popup_is-opened');
-
-    const closeButton = modal.querySelector('.popup__close');
-
-    function handleCloseButton() {
-        closeModal(type);
-        closeButton.removeEventListener('click', handleCloseButton);
-    };
-    
-    function handleKeyDown(event) {
-        if (event.key === 'Escape') {
-            closeModal(type);
-            document.removeEventListener('keydown', handleKeyDown);
-        }
-    };
-    
-    function handleOutside () {
-
-        const isClickInside = !!event.target.closest('.popup__content');
-        if (!isClickInside) {
-            closeModal(type);
-            modal.removeEventListener('click', handleOutside);
-        }
-    };
-    
-    closeButton.addEventListener('click', handleCloseButton);
     document.addEventListener('keydown', handleKeyDown);
     modal.addEventListener('click', handleOutside);
+    closeButtons.forEach((item) => {
+        item.addEventListener('click', () => {
+                closeModal(modal);
+        });
+    });
+    };
+
+function handleKeyDown(event) {
+    if (event.key === 'Escape') {
+        const popupIsOpen = document.querySelector('.popup_is-opened');
+        closeModal(popupIsOpen);
+    }
+};
+    
+function handleOutside () {
+    const isClickInside = !!event.target.closest('.popup__content');   //Добрый! В задании нет обязательных требований к реализации по данному пункту.
+    if (!isClickInside) {
+        const popupIsOpen = document.querySelector('.popup_is-opened');
+        closeModal(popupIsOpen);
+    }
 };
 
-export function closeModal (type) {
-    const modal = document.querySelector(`.popup_type_${type}`);
+export function closeModal (modal) {
     modal.classList.remove('popup_is-opened');
+    modal.removeEventListener('click', handleOutside);
+    document.removeEventListener('keydown', handleKeyDown);
+    closeButtons.forEach((item) => {
+        item.removeEventListener('click', () => {
+                closeModal(modal);
+        });
+    });
 };
+
 
 
 
