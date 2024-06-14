@@ -1,7 +1,7 @@
 import './pages/index.css';
 import { initialCards } from './components/cards.js';
 import { createCard, deleteCard, likeCard } from './components/card.js';
-import { openModal, closeModal } from './components/modal.js';
+import { openModal, closeModal, handleCloseModal } from './components/modal.js';
 
 const container = document.querySelector('.places__list');
 
@@ -18,6 +18,11 @@ const formEditDescription = formEdit.elements.description;
 const formAdd = document.forms.new_place;
 const placeName = formAdd.elements.place_name;
 const placeLink = formAdd.elements.link;
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+const modalImageText = document.querySelector('.popup__caption');
+const modalImageSrc = document.querySelector('.popup__image');
+const closeButtons = document.querySelectorAll('.popup__close');
 
 const modalNewCard = document.querySelector('.popup_type_new-card');
 const modalEditProfile = document.querySelector('.popup_type_edit');
@@ -28,14 +33,14 @@ addPlace.addEventListener('click', handleOpenModalAddPlace);
 
 function handleOpenModalEdit () {
     openModal(modalEditProfile);
-    formEditName.value = document.querySelector('.profile__title').textContent;
-    formEditDescription.value = document.querySelector('.profile__description').textContent;
+    formEditName.value = profileTitle.textContent;
+    formEditDescription.value = profileDescription.textContent;
 };
 
 function handleFormSubmitProfile(evt) {
     evt.preventDefault();
-    document.querySelector('.profile__title').textContent = formEditName.value;
-    document.querySelector('.profile__description').textContent = formEditDescription.value;
+    profileTitle.textContent = formEditName.value;
+    profileDescription.textContent = formEditDescription.value;
     closeModal(modalEditProfile);
 };
 
@@ -57,11 +62,13 @@ formAdd.addEventListener('submit', handleFormSubmitNewplace);
 
 function handleOpenModalImage (name,link) {
     openModal(modalImage);
-    const modalImageText = document.querySelector('.popup__caption');
     modalImageText.textContent = name;
-    const modalImageSrc = document.querySelector('.popup__image');
     modalImageSrc.src = link;
+    modalImageSrc.alt = name;
 };
 
+closeButtons.forEach((item) => {
+    item.addEventListener('click', handleCloseModal);
+});
 
 
