@@ -168,7 +168,7 @@ enableValidation(validationConfig);
 
 // Информация о пользователе на странице
 let userId = "";
-function UserProfile(user) {
+function showUserProfile(user) {
     profileTitle.textContent = user.name;
     profileDescription.textContent = user.about;
     profileImage.setAttribute(
@@ -181,7 +181,7 @@ function UserProfile(user) {
 // Получение информации о пользователе и карточках
 Promise.all([getProfileAPI(), getCardsAPI()])
   .then(([user, cards]) => {
-    UserProfile(user);
+    showUserProfile(user);
     showCards(cards, deleteCard, handleOpenModalImage, handleLikeCard, userId);
   })
   .catch((err) => {

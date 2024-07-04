@@ -6,6 +6,9 @@ const handleResponse = (response) => {
   if (response.ok) {
     return response.json();
   }
+  else {
+    throw new Error('Ошибка!');
+  }
 };
 
 const apiURLpart = {
