@@ -4,7 +4,7 @@ export function openModal(modal) {
     modal.classList.add('popup_is-opened');
     document.addEventListener('keydown', handleKeyDown);
     modal.addEventListener('click', handleOutside);
-    };
+};
 
 function handleKeyDown(evt) {
     if (evt.key === 'Escape') {
@@ -20,6 +20,7 @@ function handleOutside (evt) {
 };
 
 export function handleCloseModal(evt) {
+    
     const closeModalFromButton = evt.target.closest('.popup');
         closeModal(closeModalFromButton);
 };
