@@ -1,4 +1,10 @@
 # Проектная работа Mesto
-git@github.com:Tatianaign20/mesto-project-ff.git
-https://github.com/Tatianaign20/mesto-project-ff/
+Учебный проект.
+
+## Стек
+HTML, CSS, JavaScript.
+
+## Ссылка
+https://tatianaign20.github.io/mesto-project-ff/
+
 
