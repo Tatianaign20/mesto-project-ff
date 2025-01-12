@@ -39,7 +39,7 @@ export function createCard (card, deleteCard, handleOpenModalImage, handleLikeCa
     if (card.owner._id !== userId) {
        cardElementImage.onerror = function() {
     // Если произошла ошибка при загрузке изображения,удаляем карточку целиком
-       cardElement.remove();
+       cardElement.style.display = 'none';
        };
     }
     cardElementTitle.textContent = card.name;
