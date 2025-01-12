@@ -35,8 +35,13 @@ export function createCard (card, deleteCard, handleOpenModalImage, handleLikeCa
     const cardElementTitle = cardElement.querySelector('.card__title');
     cardElementImage.src = card.link;
     cardElementImage.alt = card.name;
+        // Добавляем обработчик ошибки загрузки изображения
+    cardElementImage.onerror = function() {
+        // Если произошла ошибка при загрузке изображения,
+        // удаляем элемент-карточку целиком
+    cardElement.remove();
+    };
     cardElementTitle.textContent = card.name;
-
     const likeCounter = cardElement.querySelector('.like_count');
     likeCounter.textContent = card.likes.length;
 
