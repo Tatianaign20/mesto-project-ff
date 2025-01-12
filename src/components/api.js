@@ -78,6 +78,15 @@ const sendNewCardAPI = (name, link) => {
   .then(handleResponse)
 };
 
+export const deleteCardAPI = (id) => {
+  const cardsURL = BASE_URL + `${apiURLpart.cards}/${id}`;
+  return fetch(cardsURL, {
+    method: "DELETE",
+    headers
+  })
+  .then(handleResponse)
+};
+
 const likeCardAPI = (id) => {
   const likesURL = BASE_URL + `${apiURLpart.likes}/${id}`; 
   return fetch(likesURL, {

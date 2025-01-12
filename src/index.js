@@ -1,8 +1,8 @@
 import './pages/index.css';
-import { handleLikeCard, createCard, deleteCard } from './components/card.js';
+import { handleLikeCard, createCard } from './components/card.js';
 import { openModal, closeModal, handleCloseModal } from './components/modal.js';
 import { validationConfig, enableValidation, clearValidation } from './components/validation.js';
-import { getProfileAPI, getCardsAPI, sendProfileAPI, sendNewCardAPI, sendAvatarAPI } from './components/api.js';
+import { getProfileAPI, getCardsAPI, sendProfileAPI, sendNewCardAPI, sendAvatarAPI, deleteCardAPI } from './components/api.js';
 
 const container = document.querySelector('.places__list');
 const editProfile = document.querySelector('.profile__edit-button');
@@ -26,6 +26,17 @@ const modalNewCard = document.querySelector('.popup_type_new-card');
 const modalEditProfile = document.querySelector('.popup_type_edit');
 const modalImage = document.querySelector('.popup_type_image');
 const modalAvatar = document.querySelector('.popup_type_avatar')
+
+export function deleteCard (evt, cardID) {
+  const cardElement = evt.target.closest('.card');
+  deleteCardAPI(cardID)
+  .then(() => {
+      cardElement.remove(); // Удаляем карточку из DOM после успешного удаления с сервера
+  })
+  .catch((err) => {
+      console.error(`Ошибка удаления карточки: ${err}`);
+  });
+};
 
 // Для кнопки
 function renderLoading (isLoading, button, newText = "Сохранение...", baseText = "Сохранить") {

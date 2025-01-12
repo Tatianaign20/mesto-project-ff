@@ -37,8 +37,7 @@ export function createCard (card, deleteCard, handleOpenModalImage, handleLikeCa
     cardElementImage.alt = card.name;
         // Добавляем обработчик ошибки загрузки изображения
     cardElementImage.onerror = function() {
-        // Если произошла ошибка при загрузке изображения,
-        // удаляем элемент-карточку целиком
+        // Если произошла ошибка при загрузке изображения,удаляем карточку целиком
     cardElement.remove();
     };
     cardElementTitle.textContent = card.name;
@@ -47,12 +46,14 @@ export function createCard (card, deleteCard, handleOpenModalImage, handleLikeCa
 
     const deleteButton = cardElement.querySelector('.card__delete-button');
     if (card.owner._id === userId) {
+        console.log(`Card ID: ${card._id}`);
         deleteButton.addEventListener('click', (evt) => {
-          deleteCard(evt, card._id);
+        deleteCard(evt, card._id);
         });
     }
     else {
-        deleteButton.remove();
+        // deleteButton.remove();
+        deleteButton.style.display = 'none';
     };
     
     cardElementImage.addEventListener('click', () => {
@@ -74,7 +75,7 @@ export function createCard (card, deleteCard, handleOpenModalImage, handleLikeCa
     return cardElement;
 };
 
-export function deleteCard (evt) {
-    const cardDelete = evt.target.closest('.card');
-    cardDelete.remove();
-};
+// export function deleteCard (evt) {
+//     const cardDelete = evt.target.closest('.card');
+//     cardDelete.remove();
+// };
